@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barre de Progression</title>
+  <style>
+    .container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: Arial, sans-serif;
+      margin: 10px;
+    }
+    .input-box {
+      width: 50px;
+      text-align: center;
+      font-size: 16px;
+      padding: 5px;
+    }
+    .progress-container {
+      flex-grow: 1;
+      background: #e0e0e0;
+      border-radius: 5px;
+      overflow: hidden;
+      height: 20px;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s ease, background-color 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <input 
+      type="number" 
+      class="input-box" 
+      id="scoreInput" 
+      min="1" 
+      max="10" 
+      value="1"
+    />
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </div>
+  <script>
+    const input = document.getElementById('scoreInput');
+    const progressBar = document.getElementById('progressBar');
+
+    function updateProgressBar() {
+      let score = parseInt(input.value, 10);
+      score = Math.min(Math.max(score, 1), 10);
+
+      const percentage = (score / 10) * 100;
+      progressBar.style.width = ${percentage}%;
+
+      if (score < 5) {
+        progressBar.style.backgroundColor = 'Bordeaux';
+      } else if (score >= 6 && score <= 7) {
+        progressBar.style.backgroundColor = 'orange';
+      } else if (score >= 8) {
+        progressBar.style.backgroundColor = 'green';
+      }
+    }
+
+    input.addEventListener('input', updateProgressBar);
+    updateProgressBar();
+  </script>
+</body>
+</html>
