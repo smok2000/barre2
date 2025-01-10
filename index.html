@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Barre de Progression</title>
+  <title>Barre de Progression Dynamique</title>
   <style>
+    /* Styles de base */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
     .container {
       display: flex;
       align-items: center;
@@ -12,12 +18,14 @@
       font-family: Arial, sans-serif;
       margin: 10px;
     }
+
     .input-box {
       width: 50px;
       text-align: center;
       font-size: 16px;
       padding: 5px;
     }
+
     .progress-container {
       flex-grow: 1;
       background: #e0e0e0;
@@ -25,6 +33,7 @@
       overflow: hidden;
       height: 20px;
     }
+
     .progress-bar {
       height: 100%;
       width: 0%;
@@ -33,6 +42,8 @@
   </style>
 </head>
 <body>
+  <h1>Barre de Progression Dynamique</h1>
+  
   <div class="container">
     <input 
       type="number" 
@@ -40,34 +51,39 @@
       id="scoreInput" 
       min="1" 
       max="10" 
-      value="1"
+      value="1" 
+      onchange="updateProgressBar()" 
     />
     <div class="progress-container">
       <div class="progress-bar" id="progressBar"></div>
     </div>
   </div>
+
   <script>
-    const input = document.getElementById('scoreInput');
-    const progressBar = document.getElementById('progressBar');
-
+    // Fonction pour mettre à jour la barre de progression et sa couleur
     function updateProgressBar() {
-      let score = parseInt(input.value, 10);
-      score = Math.min(Math.max(score, 1), 10);
+      // Récupérer la valeur du score
+      const score = parseInt(document.getElementById('scoreInput').value, 10);
+      const progressBar = document.getElementById('progressBar');
+      
+      // Calculer le pourcentage de la barre
+      const percentage = Math.min(Math.max(score, 1), 10) * 10;
 
-      const percentage = (score / 10) * 100;
-      progressBar.style.width = ${percentage}%;
+      // Appliquer la largeur de la barre
+      progressBar.style.width = percentage + '%';
 
+      // Changer la couleur de la barre en fonction du score
       if (score < 5) {
-        progressBar.style.backgroundColor = 'Bordeaux';
+        progressBar.style.backgroundColor = 'Bordeaux';  // Bordeaux pour les scores < 5
       } else if (score >= 6 && score <= 7) {
-        progressBar.style.backgroundColor = 'orange';
+        progressBar.style.backgroundColor = 'orange';  // Orange pour les scores entre 6 et 7
       } else if (score >= 8) {
-        progressBar.style.backgroundColor = 'green';
+        progressBar.style.backgroundColor = 'green';  // Vert pour les scores >= 8
       }
     }
 
-    input.addEventListener('input', updateProgressBar);
-    updateProgressBar();
+    // Initialisation de la barre de progression au chargement de la page
+    window.onload = updateProgressBar;
   </script>
 </body>
 </html>
