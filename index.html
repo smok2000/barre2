@@ -72,13 +72,13 @@
       // Appliquer la largeur de la barre
       progressBar.style.width = percentage + '%';
 
-      // Changer la couleur de la barre en fonction du score
+      // Changer la couleur de la barre en fonction du score en utilisant les valeurs RGB
       if (score < 5) {
-        progressBar.style.backgroundColor = 'Bordeaux';  // Bordeaux pour les scores < 5
+        progressBar.style.backgroundColor = 'rgb(128, 0, 32)';  // Bordeaux pour les scores < 5
       } else if (score >= 6 && score <= 7) {
-        progressBar.style.backgroundColor = 'orange';  // Orange pour les scores entre 6 et 7
+        progressBar.style.backgroundColor = 'rgb(255, 165, 0)';  // Orange pour les scores entre 6 et 7
       } else if (score >= 8) {
-        progressBar.style.backgroundColor = 'green';  // Vert pour les scores >= 8
+        progressBar.style.backgroundColor = 'rgb(0, 128, 0)';  // Vert pour les scores >= 8
       }
     }
 
